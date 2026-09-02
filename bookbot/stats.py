@@ -28,7 +28,7 @@ def count_letters(readString: str) -> dict[str, int]:
 
     for lett in readString:
         letter = lett.lower()
-        if lett in result:
+        if letter in result:
            result[letter] += 1
         else:
             result[letter] = 1
@@ -48,6 +48,36 @@ def count_letters_ai(readString: str) -> dict[str, int]:
 
     return result
 
-
+## AI generated modern alternative
 def count_letters2(readString: str) -> dict[str, int]:
     return dict(Counter(readString.lower()))
+
+
+## Sort on function to sort letters
+def sort_on(countedWords: tuple[str, int]) -> int:
+    return countedWords[1]
+
+## create a list which contains a tuple of each word and its count
+def chars_dict_to_sorted_list(ogdict: dict[str, int]) -> list[tuple[str, int]]:
+    conList: list[tuple[str, int]] = []
+
+    for letter, value in ogdict.items():
+        tmpTup = (letter, value)
+        #print(tmpTup)
+        conList.append(tmpTup)
+
+    sortedConlist = sorted(conList, reverse=True,  key=sort_on)
+    return sortedConlist
+
+#Print report function to only show letters and no symbols
+
+def print_report(bookPath: str, wordCount: int, charSorted: list[tuple[str, int]]):
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {bookPath}...")
+    print("----------- Word Count ----------")
+    print(f"Found {wordCount} total words")
+    print("--------- Character Count -------")
+    for letter, value in charSorted:
+        if letter.isalpha():
+            print(f"{letter}: {value}")
+    print("============= END ===============")
